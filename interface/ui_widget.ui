@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>828</width>
+    <height>559</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tab_widget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="setting_tab">
+      <attribute name="title">
+       <string>Setting</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="2" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Standard Result Val Path:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="standard_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_3">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>IMG Path:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="img_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_4">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>YOLO v5 Improvement Path:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="a_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Deviation Score:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit"/>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>YOLO v5 Path:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="b_path_line_edit"/>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="compare_start">
+         <property name="text">
+          <string>Start</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="result_view_tab">
+      <attribute name="title">
+       <string>Result View</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QTableWidget" name="res_table">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <column>
+          <property name="text">
+           <string>IMAGE ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>IMG VIEW</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>IMG INF</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>CATEGORY VIEW</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>IMP CATE COVERAGE RATE</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>INTR CATE COVERAGE RATE</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>BOX VIEW</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>IMP BOX AMOUNT</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>INTR BOX AMOUNT</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>IMP BOX COVERAGE RATE</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>INTR BOX COVERAGE RATE</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>IMP COMPREHENSIVE EVALUATION</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>INTR COMPREHENSIVE EVALUATION</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

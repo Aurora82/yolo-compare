@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Img_Inf_Form</class>
+ <widget class="QWidget" name="Img_Inf_Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QTableWidget" name="tableWidget">
+       <row>
+        <property name="text">
+         <string>name</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>path</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>format</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>size</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>width</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>height</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>Information</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

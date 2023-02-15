@@ -1,16 +1,18 @@
 import json
 from collections import defaultdict
-import img_func
-import pred_func
-import val_func
-import category_analyse
-import box_analyse
-from res import Result
+
+from function import pred_func
+from function import val_func
+from function import category_analyse
+from function import box_analyse
+from function import img_func
+from function.res import Result
 
 
-def Compare(dir1, dir2, dir3):
+def compare(dir1, dir2, dir3, img_dir):
     """
     Make all function to run.
+    :param img_dir:
     :param dir1: A _prediction file directory.
     :param dir2: B _prediction file directory.
     :param dir3: Standard val folder directory.
@@ -23,11 +25,11 @@ def Compare(dir1, dir2, dir3):
     # Standard val
     dict_c = val_func.trans_to_dict(dir3)
     # Result list
-    res_list = list()
+    res_dict = dict()
     # Image ids
     keys = dict_c.keys()
 
-    img_dir_path = '/Users/lumi/Documents/模型测试数据与对比需求分析 copy/val2017'
+    img_dir_path = img_dir
     count = 0
     for _key in keys:  # "139": [["58", "0.389578", "0.416103", "0.038594", "0.163146"],...]
         print("_key: ", _key)
@@ -48,13 +50,15 @@ def Compare(dir1, dir2, dir3):
         res.b_box_coverage_rate = 0
         res.a_comprehensive_evaluation = 0
         res.b_comprehensive_evaluation = 0
-        res_list.append(res.__dict__)
-        # count += 1
-        # if count > 4:
-        break
+        res_dict[res.image_id] = res
+
+        count += 1
+        if count > 2:
+            break
 
     # with open("/Users/lumi/Git/YOLO_Analysis/function/test/res.txt", 'w') as res:
     #     res.write(json.dumps(res_list))
-    for li in res_list:
-        print(li)
+    for li in res_dict.keys():
+        print(res_dict[li])
+    return res_dict
 

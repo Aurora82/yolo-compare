@@ -1,4 +1,2 @@
-if __name__ == '__main__':
-    count = 0
-    count += 1
-    print(count)
+_dict = {'name': 'Lisa', 'phone': '18686896186'}
+print(len(_dict.keys()))

@@ -1,7 +1,7 @@
-from res import Result
-from res import BoxView
+from function.res import Result
+from function.res import BoxView
 from math import sqrt
-from img_func import img_inf_fill
+from function.img_func import img_inf_fill
 
 
 def analyse(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int, deviation: int):

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Box_Form</class>
+ <widget class="QWidget" name="Box_Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>846</width>
+    <height>460</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QTableWidget" name="tableWidget">
+       <column>
+        <property name="text">
+         <string>category</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>standard_box_point</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>a_box_point</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>b_box_point</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>a_deviation_value_fiducial_point</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>b_deviation_value_fiducial_point</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>standard_box_area</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>a_box_area</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>b_box_area</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>a_standard_box_area_differ_rate</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>b_standard_box_area_differ_rate</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>a_score</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>b_score</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
