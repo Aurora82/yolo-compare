@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>828</width>
-    <height>559</height>
+    <width>853</width>
+    <height>671</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_4">
+  <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
     <widget class="QTabWidget" name="tab_widget">
      <property name="enabled">
@@ -27,116 +27,132 @@
        <string>Setting</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="0">
-        <layout class="QGridLayout" name="gridLayout_3">
-         <item row="2" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Standard Result Val Path:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="standard_path_line_edit"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_3">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="3" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>IMG Path:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="img_path_line_edit"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_4">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item row="0" column="0">
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>YOLO v5 Improvement Path:</string>
-             </property>
-            </widget>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>YOLO v5 Improvement Path:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="a_path_line_edit"/>
+             </item>
+            </layout>
            </item>
            <item>
-            <widget class="QLineEdit" name="a_path_line_edit"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="yolo_imp_path_select_push_button">
              <property name="text">
-              <string>PushButton</string>
+              <string>Select File</string>
              </property>
             </widget>
            </item>
           </layout>
          </item>
-         <item row="4" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>YOLO v5 Path:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="b_path_line_edit"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="yolo_path_select_push_button">
+             <property name="text">
+              <string>Select File</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Standard Result Val Path:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="standard_path_line_edit"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="standard_result_val_path_select_push_button">
+             <property name="text">
+              <string>Select Path</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>IMG Path:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="img_path_line_edit"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPushButton" name="img_path_select_push_button">
+             <property name="text">
+              <string>Select Path</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="2,5,1">
            <item>
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Deviation Score:</string>
+              <string>Box Distance Deviation Number:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="lineEdit"/>
-           </item>
-          </layout>
-         </item>
-         <item row="1" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <item>
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>YOLO v5 Path:</string>
+            <widget class="QSlider" name="deviation_number_slider">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="b_path_line_edit"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton_2">
-             <property name="text">
-              <string>PushButton</string>
-             </property>
-            </widget>
+            <widget class="QLineEdit" name="deviation_number_line_edit"/>
            </item>
           </layout>
          </item>
         </layout>
        </item>
-       <item row="3" column="0">
+       <item row="1" column="0">
         <widget class="QPushButton" name="compare_start">
          <property name="text">
           <string>Start</string>
@@ -188,6 +204,11 @@
          <column>
           <property name="text">
            <string>BOX VIEW</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>STANDARD BOX AMOUNT</string>
           </property>
          </column>
          <column>

@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget
-from ui_category_widget import Ui_Category_Form
+from interface.ui_py.ui_category_widget import Ui_Category_Form
 
 
 class CategoryWidget(QWidget, Ui_Category_Form):

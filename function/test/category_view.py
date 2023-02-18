@@ -1,4 +1,4 @@
-from function.res import Result, CategoryView
+from classes.res import Result, CategoryView
 
 if __name__ == "__main__":
     view = CategoryView()

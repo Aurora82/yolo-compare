@@ -18,6 +18,18 @@
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
       <widget class="QTableWidget" name="tableWidget">
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::AdjustToContents</enum>
+       </property>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>330</number>
+       </attribute>
        <row>
         <property name="text">
          <string>name</string>

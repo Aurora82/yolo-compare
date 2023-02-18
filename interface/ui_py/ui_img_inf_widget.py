@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QHeaderView, QSizePolicy,
-    QTableWidget, QTableWidgetItem, QWidget)
+from PySide6.QtWidgets import (QAbstractScrollArea, QApplication, QGridLayout, QHeaderView,
+    QSizePolicy, QTableWidget, QTableWidgetItem, QWidget)
 
 class Ui_Img_Inf_Form(object):
     def setupUi(self, Img_Inf_Form):
@@ -47,6 +47,10 @@ class Ui_Img_Inf_Form(object):
         __qtablewidgetitem6 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem6)
         self.tableWidget.setObjectName(u"tableWidget")
+        self.tableWidget.setLayoutDirection(Qt.LeftToRight)
+        self.tableWidget.setAutoFillBackground(False)
+        self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(330)
 
         self.gridLayout.addWidget(self.tableWidget, 0, 0, 1, 1)
 

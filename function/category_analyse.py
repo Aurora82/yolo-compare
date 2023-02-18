@@ -1,5 +1,5 @@
-from function.res import Result
-from function.res import CategoryView
+from classes.res import Result
+from classes.category_view import CategoryView
 
 
 def analyse(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int):
@@ -16,15 +16,15 @@ def analyse(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int
     a_pred_dict = pred_category_detail_analyse(dict_a, image_id)
     b_pred_dict = pred_category_detail_analyse(dict_b, image_id)
     c_pred_dict = val_category_detail_analyse(dict_c, image_id)
-    # print(a_pred_dict)
-    # print(b_pred_dict)
-    # print(c_pred_dict)
+
     keys_a, keys_b, keys_c = a_pred_dict.keys(), b_pred_dict.keys(), c_pred_dict.keys()
     union_keys = set(keys_a).union(keys_b).union(keys_c)
     # print(union_keys)
 
     fill_category_view(a_pred_dict, b_pred_dict, c_pred_dict, union_keys, res)
-
+    print('--------------------')
+    res.a_category_coverage_rate = float(res.standard_category_amount - res.a_category_miss_amount) / res.standard_category_amount
+    res.b_category_coverage_rate = float(res.standard_category_amount - res.b_category_miss_amount) / res.standard_category_amount
 
 # def category_coverage_rate_analyse(res: Result):
 #     """
@@ -54,7 +54,7 @@ def category_amount(a_pred_dict: dict, b_pred_dict: dict, c_pred_dict: dict, res
 
 def fill_category_view(a_pred_dict: dict, b_pred_dict: dict, c_pred_dict: dict, union_keys: set, res: Result):
     """
-    Fill all the property of category view class.
+    Fill all the property of category view classes.
     :param a_pred_dict: dict[category: num]
     :param b_pred_dict: dict[category: num]
     :param c_pred_dict: dict[category: num]
@@ -69,6 +69,14 @@ def fill_category_view(a_pred_dict: dict, b_pred_dict: dict, c_pred_dict: dict, 
             view.standard_category = _key  # '139'
             view.standard_category_box_amount = c_pred_dict[_key]
             res.standard_category_amount += 1
+            if not a_pred_dict.__contains__(_key):
+                # If _key is contain in dict_c, but not in dict_a.
+                # It means that dict_c's _key is missed in dict_a.
+                res.a_category_miss_amount += 1
+            if not b_pred_dict.__contains__(_key):
+                # If _key is contain in dict_c, but not in dict_b.
+                # It means that dict_c's _key is missed in dict_b.
+                res.b_category_miss_amount += 1
         else:
             view.standard_category = -1
             view.standard_category_box_amount = -1
@@ -79,6 +87,7 @@ def fill_category_view(a_pred_dict: dict, b_pred_dict: dict, c_pred_dict: dict, 
         else:
             view.a_category = -1
             view.a_category_box_amount = -1
+
         # B category view
         if b_pred_dict.__contains__(_key):
             view.b_category = _key

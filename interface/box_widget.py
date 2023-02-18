@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget
-from ui_box_widget import Ui_Box_Form
+from interface.ui_py.ui_box_widget import Ui_Box_Form
 
 
 class BoxWidget(QWidget, Ui_Box_Form):

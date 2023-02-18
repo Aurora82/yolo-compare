@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QWidget
-from ui_img_inf_widget import Ui_Img_Inf_Form
+from interface.ui_py.ui_img_inf_widget import Ui_Img_Inf_Form
 
 
 class ImgInfWidget(QWidget, Ui_Img_Inf_Form):

@@ -1,12 +1,16 @@
-from function.res import Result
-from function.res import BoxView
+from classes.res import Result
+from classes.box_view import BoxView
 from math import sqrt
-from function.img_func import img_inf_fill
 
 
-def analyse(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int, deviation: int):
+def analyse(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int, deviation: float):
     print(res.image_id, " Uniformize Successful!")
     fill_box_view(res, dict_a, dict_b, dict_c, image_id, deviation)
+    res.a_box_amount = get_box_amount(dict_a, image_id)
+    res.b_box_amount = get_box_amount(dict_b, image_id)
+    res.standard_box_amount = get_box_amount(dict_c, image_id)
+    res.a_box_coverage_rate = float(res.standard_box_amount - res.a_deviation_count) / res.standard_box_amount
+    res.b_box_coverage_rate = float(res.standard_box_amount - res.b_deviation_count) / res.standard_box_amount
 
 
 def uniformize(res: Result, dict_a: dict, dict_b: dict):
@@ -18,7 +22,7 @@ def box_size_uniformize(_dict: dict, res: Result):
     """
     Uniformize the box position, width, height into between zero and one.
     :param _dict: dict_a, dict_b.
-    :param res: Result class.
+    :param res: Result classes.
     :return: None
     """
     keys = _dict.keys()
@@ -30,11 +34,10 @@ def box_size_uniformize(_dict: dict, res: Result):
 
 def get_uniformize(res: Result, bbox: list):
     box = [0, 0, 0, 0]
-    box[0] = float(bbox[0]) * int(res.img_inf.width)  # box_cx
-    box[1] = float(bbox[1]) * int(res.img_inf.height)  # box_cy
-    box[2] = float(bbox[2]) * int(res.img_inf.width)  # box_w
-    box[3] = float(bbox[3]) * int(res.img_inf.height)  # box_h
-
+    box[0] = float(bbox[0]) / int(res.img_inf.width)  # box_cx
+    box[1] = float(bbox[1]) / int(res.img_inf.height)  # box_cy
+    box[2] = float(bbox[2]) / int(res.img_inf.width)  # box_w
+    box[3] = float(bbox[3]) / int(res.img_inf.height)  # box_h
     return box
 
 
@@ -47,7 +50,7 @@ def get_uniformize_restore(res: Result, bbox: list):
     return box
 
 
-def fill_box_view(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int, deviation: int):
+def fill_box_view(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_id: int, deviation: float):
     li = dict_c[image_id]  # li: [["58", "0.389578", "0.416103", "0.038594", "0.163146"], [...]]
     l_a = dict_a[image_id]
     # [{'image_id': 298251, 'category_id': 24, 'bbox': [518.5, 102.75, 46.0, 42.25], 'score': 0.88916}]
@@ -62,7 +65,7 @@ def fill_box_view(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_i
                 float(_li[4]) * res.img_inf.height)  # (0.038594 * 152) * (0.163146 * 124)
 
         # A
-        a_box_dict = dict()
+        a_box_dict = dict()  # d_a
         a_mini_dis = res.img_inf.diagonal  # The max length for img
         for d_a in l_a:  # d_a: {'image_id': 298251, 'category_id': 24, 'bbox': [0.389578, 0.626338, 0.389578, 0.389578], 'score': 0.88916}
             bbox = d_a['bbox']
@@ -74,9 +77,10 @@ def fill_box_view(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_i
                 a_box_dict = d_a
 
         if deviation < a_mini_dis:
-            res.a_deviation_count = res.a_deviation_count + 1
+            res.a_deviation_count += 1
         else:
             bbox = a_box_dict['bbox']
+            box_view.a_box_point = get_uniformize_restore(res, bbox)
             box_view.a_deviation_value_fiducial_point = a_mini_dis / res.img_inf.diagonal  # uniformize the distance by diagonal length in img
             box_view.a_box_area = (bbox[2] * res.img_inf.width) * (bbox[3] * res.img_inf.height)
 
@@ -102,9 +106,10 @@ def fill_box_view(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_i
                 b_box_dict = d_b
 
         if deviation < b_mini_dis:
-            res.b_deviation_count = res.b_deviation_count + 1
+            res.b_deviation_count += 1
         else:
             bbox = b_box_dict['bbox']
+            box_view.b_box_point = get_uniformize_restore(res, bbox)
             box_view.b_deviation_value_fiducial_point = b_mini_dis / res.img_inf.diagonal  # uniformize the distance by diagonal length in img
             box_view.b_box_area = (bbox[2] * res.img_inf.width) * (bbox[3] * res.img_inf.height)
             if box_view.b_box_area >= box_view.standard_box_area:
@@ -118,22 +123,15 @@ def fill_box_view(res: Result, dict_a: dict, dict_b: dict, dict_c: dict, image_i
         res.box_view.append(box_view)
 
 
-def get_box_amount(_dict: dict, _key: int, res: Result):
+def get_box_amount(_dict: dict, _key: int):
     """
     Return the box amount mark in image.
-    :param res:
     :param _key: image id. (Like: 139)
     :param _dict: YOLO dictionary, YOLO improvement dictionary or val's.
     :return:
     """
-
-    box_amount = 0
-    if not _dict.__contains__(_key):
-        print("YOLO Improvement's Img " + str(_key) + " not found.")
-    else:
-        # list_a: [{'image_id': 298251, 'category_id': 24, 'bbox': [518.5, 102.75, 46.0, 42.25], 'score': 0.88916}]}
-        # _key:139  l_c(list_c): [["58", "0.389578", "0.416103", "0.038594", "0.163146"]]
-        li = _dict[_key]
-        box_amount = len(li)
-
-    # return box_amount
+    # list_a: [{'image_id': 298251, 'category_id': 24, 'bbox': [518.5, 102.75, 46.0, 42.25], 'score': 0.88916}]}
+    # _key:139  l_c(list_c): [["58", "0.389578", "0.416103", "0.038594", "0.163146"]]
+    li = _dict[_key]
+    box_amount = len(li)
+    return box_amount

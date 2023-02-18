@@ -1,2 +1,3 @@
 _dict = {'name': 'Lisa', 'phone': '18686896186'}
-print(len(_dict.keys()))
+_dict["awf"] = 'wad'
+print(_dict)

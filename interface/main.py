@@ -1,10 +1,16 @@
-from PySide6.QtWidgets import QApplication, QMainWindow
-from widget import Widget
+from PySide6.QtWidgets import QApplication
 
-if __name__ == '__main__':
-    app = QApplication()
+import function.analyse
+from interface.widget import Widget
+from function.analyse import compare
+import threading
 
-    widget = Widget()
-    widget.show()
+back_thread = threading.Thread(target=function.analyse.pre_func, daemon=True)
+back_thread.start()
 
-    app.exec()
+app = QApplication()
+
+widget = Widget()
+widget.show()
+
+app.exec()

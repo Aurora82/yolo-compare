@@ -1,4 +1,4 @@
-from function.res import Result
+from classes.res import Result
 from PIL import Image
 from math import sqrt
 
