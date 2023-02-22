@@ -1,0 +1,142 @@
+1. _predictions (pred_func)
+	Type Like: {298251: [{	'image_id': 298251,
+						'category_id': 24,
+						'bbox': [518.5, 102.75, 46.0, 42.25],
+						'score': 0.88916}
+					]
+			}
+
+
+2. val
+	fname_list = ['000000000139.txt', '000000000285.txt', ...]
+	dict_c =~ val_dict:{298251:[[category_id, box_cx, box_cy, box_w, box_h],...]}
+	example:{
+			"139": [
+					["58", "0.389578", "0.416103", "0.038594", "0.163146"],
+					["62", "0.127641", "0.505153", "0.233312", "0.222700"],
+					[...]
+				]
+
+3. res_dict
+	# The res_dict must be setted when transport into isRight() func in category_analyse.py
+	res_dict = {
+			image_id: int,
+			...
+		}
+
+
+main interface
+
+	    		   				|			     	A		         						|		B
+|image_id|img view|category view|category coverage rate|box amount|box coverage rate |commprehensive evaluation|	  ...		|
+
+
+category view(image_id)
+
+		standard				 A						B
+|category| category amount | category| category amount |category| category amount |
+	1		100			  1			56			1		40
+	2		300			  -			--			2		20
+	-		---			  10			2			10		2
+
+res_list:[{	'image_id': 298251,
+			'img view': 24,
+			'img_inf':[
+					name: str
+   			 		path: str
+    					_format: str
+    					size: tuple
+    					width: int
+    					height: int
+					]
+			'category view': [{
+							standard category:'1',
+							standard category_box_amount: '20', # the number of box in one category_id
+							a_category:'1',
+							a_category_box_amount: '20',
+							b_category:'1',
+							b_category_box_amount: '20',
+						},{...}
+						]
+			'a_category coverage rate': 0.88916,
+			'b_category coverage rate': 0.88916,
+			'box_view':[{
+
+						￥category: 139
+						￥standard_box_point:[0.389578 0.416103 0.038594 0.163146]
+						￥a_box_point:[0.389578 0.416103 0.038594 0.163146]
+						b_box_point:[0.389578 0.416103 0.038594 0.163146]
+						￥a_deviation_value_fiducial_point:  5%
+						b_deviation_value_fiducial_point:  5%
+						standard_box_area: float
+						￥a_box_area: 41.512
+						b_box_area: 41.512
+						a_standard_box_area_differ_rate: +5%
+						b_standard_box_area_differ_rate: +5%
+
+						a_score: 0.86865
+						b_score: 0.86865
+
+						}
+					]
+			'a_box amount': 10
+			'a_box coverage rate': 50%
+
+
+			'b_box amount': 10
+			'b_box coverage rate': 50%
+
+			'a_comprehensive evaluation' : 96%，
+			'b_commprehensive evaluation' : 96%
+		}]
+}
+
+
+
+pred_func.json_read(dir1)
+pred_func.json_read(dir2)
+val_func.trans_to_dict(dir3)
+category_analyse
+	analyse
+		->pred_category_detail_analyse
+		->val_category_detail_analyse
+		->fill_category_view        OK:category view
+
+
+
+
+box_analyse
+
+	get_box_amount
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

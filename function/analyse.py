@@ -6,33 +6,6 @@ from function import category_analyse
 from function import box_analyse
 from function import img_func
 from classes.res import Result
-from classes.server import Server
-
-
-def pre_func():
-    server = Server()
-    socket = server.listen_socket()
-    data = []
-    picket = socket.recv(server.BUFFLEN)
-    data.append(picket)
-    para = pickle.loads(b"".join(data))
-    print(para)
-    dir1 = para.yolo_imp_file_path
-    dir2 = para.yolo_file_path
-    dir3 = para.standard_val_dir_path
-    dir4 = para.img_dir_path
-    deviation = para.deviation
-    dict_a, dict_b, dict_c = read_from_file(dir1, dir2, dir3)
-    keys = dict_c.keys()
-    count = 0
-    for _key in keys:
-        res = compare(dict_a, dict_b, dict_c, dir4, _key, deviation)
-        socket.send(pickle.dumps(res))
-        count += 1
-        if count > 3:
-            break
-    socket.close()
-
 
 def compare(dict_a, dict_b, dict_c, img_dir, _key, deviation):
     print("_key: ", _key)  # "139": [["58", "0.389578", "0.416103", "0.038594", "0.163146"],...]

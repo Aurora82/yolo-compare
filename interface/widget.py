@@ -1,7 +1,8 @@
 import pickle
-import threading
+from functools import partial
 
 from PySide6.QtWidgets import QWidget, QTableWidgetItem, QPushButton, QFileDialog
+from PySide6.QtCore import QThread, Slot, Signal
 
 from PIL import Image
 
@@ -13,19 +14,53 @@ from interface.ui_py.ui_widget import Ui_Form
 from category_widget import CategoryWidget
 from box_widget import BoxWidget
 from img_inf_widget import ImgInfWidget
+from function.thread.data_analyse_thread import DataAnalyse
 
 
 class Widget(QWidget, Ui_Form):
     res_dict = dict()
-    para = Parameters()
     client = Client()
+    para = Parameters()
+    para_signal = Signal(Parameters)
+    word = Signal(str)
 
     def __init__(self):
         super().__init__()
-
         self.box_widget = None
         self.category_widget = None
         self.img_inf_widget = None
+        self.ui_setting()
+
+
+
+    def ui_compare(self):
+        self.get_paras()
+        self.res_table.clearContents()
+
+        self.thread = QThread()
+        self.worker = DataAnalyse()
+
+        self.worker.para = self.para
+        self.worker.moveToThread(self.thread)
+
+        self.thread.started.connect(self.worker.run)
+        self.worker.finished.connect(self.thread.quit)
+        self.worker.finished.connect(self.worker.deleteLater)
+        self.thread.finished.connect(self.thread.deleteLater)
+        self.worker.result.connect(self.res_table_row_fill)
+
+        self.thread.start()
+
+        # Final resets
+        self.compare_start.setEnabled(False)
+        self.thread.finished.connect(
+            lambda: self.compare_start.setEnabled(True)
+        )
+        self.thread.finished.connect(
+            lambda: print("Task run completely!")
+        )
+
+    def ui_setting(self):
         self.setupUi(self)
         self.setWindowTitle("YOLO Result Analyse Tool")
         # self.setFixedSize(self.width(), self.height())
@@ -39,28 +74,15 @@ class Widget(QWidget, Ui_Form):
         self.b_path_line_edit.textChanged.connect(self.b_path_line_edit_changed)
         self.standard_path_line_edit.textChanged.connect(self.standard_path_line_edit_changed)
         self.img_path_line_edit.textChanged.connect(self.img_path_line_edit_changed)
-
         self.deviation_number_slider.setMinimum(0)
         self.deviation_number_slider.setMaximum(10000)
         self.deviation_number_slider.setSingleStep(1)
         self.deviation_number_slider.setTickInterval(10)
         self.deviation_number_slider.valueChanged.connect(self.slider_value_changed)
-
         self.deviation_number_line_edit.textChanged.connect(self.deviation_number_line_edit_changed)
-
         self.compare_start.clicked.connect(self.ui_compare)
 
-    def ui_compare(self):
-        self.get_paras()
-        self.data_trans()
-
-        # trans_thread = threading.Thread(target=self.data_trans)
-        # trans_thread.start()
-    def get_paras(self):
-        dir1 = self.a_path_line_edit.text()
-        dir2 = self.b_path_line_edit.text()
-        dir3 = self.standard_path_line_edit.text()
-        dir4 = self.img_path_line_edit.text()
+    def get_paras(self):  # Used in test
         dir1 = '/Users/lumi/Documents/模型测试数据与对比需求分析 copy/YOLOv5改进结果/_predictions.json'
         dir2 = '/Users/lumi/Documents/模型测试数据与对比需求分析 copy/YOLOv5/_predictions.json'
         dir3 = '/Users/lumi/Documents/模型测试数据与对比需求分析 copy/coco数据集/val2017/'
@@ -87,7 +109,10 @@ class Widget(QWidget, Ui_Form):
         socket.close()
         print("Client Socket had closed.")
 
-    def res_table_one_row_fill(self, res: Result):
+    def res_table_row_fill(self, res: Result):
+        # Make a dict, in order to retrieve easily.
+        self.res_dict[res.image_id] = res
+
         img_button = QPushButton("SHOW IMG")
         img_button.clicked.connect(self.img_button_clicked)
 
